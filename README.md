@@ -1,6 +1,12 @@
 # 🎯 TikTok Comment Analyzer - Enhanced Edition
 
 [![Original Repo](https://img.shields.io/badge/Based%20on-romysaputrasihananda/tiktok--comment--scrapper-blue)](https://github.com/romysaputrasihananda/tiktok-comment-scrapper)
+[![Python Version](https://img.shields.io/badge/python-3.7%2B-blue)](https://python.org)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Status](https://img.shields.io/badge/status-Production%20Ready-brightgreen)](PROJECT_REPORT.md)
+[![Enhanced](https://img.shields.io/badge/Enhanced%20Version-v2.0.0-orange)](PROJECT_REPORT.md)
+
+![TikTok Scraper Banner](https://raw.githubusercontent.com/RomySaputraSihananda/RomySaputraSihananda/main/images/GA-U-u2bsAApmn9.jpeg)
 
 **Advanced TikTok comment extraction and social media intelligence platform for brand monitoring and competitive analysis.**
 
@@ -25,8 +31,8 @@ This project is built upon the excellent foundation of [**romysaputrasihananda/t
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/romysaputrasihananda/tiktok-comment-scrapper
-cd tiktok-comment-scrapper
+git clone https://github.com/PurplexyFlower/Tiktok-comment-analyzer.git
+cd Tiktok-comment-analyzer
 
 # 2. Setup environment
 python -m venv .venv

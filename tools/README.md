@@ -46,6 +46,25 @@ This directory contains utility scripts for processing and organizing TikTok dat
 
 ### 📝 Data Formatting Tools
 
+#### `sample_extractor.py`
+**Purpose**: Extracts sample data with metadata from TikTok JSON files to CSV format  
+**Usage**: `python sample_extractor.py <json_file> [num_samples] [output_file]`  
+**Arguments**:
+- `json_file` - Path to the JSON data file (required)
+- `num_samples` - Number of samples to extract (default: 10, use 'all' for complete conversion)
+- `output_file` - Output CSV file path (optional, auto-generated if not provided)
+**Examples**:
+- `python sample_extractor.py lancome_Malaysia_data.json` (extract 10 samples)
+- `python sample_extractor.py lancome_Malaysia_data.json 25` (extract 25 samples)
+- `python sample_extractor.py lancome_Malaysia_data.json all` (convert entire dataset)
+- `python sample_extractor.py data.json 50 my_samples.csv` (custom output file)
+**Features**:
+- Flexible sample size selection or complete dataset conversion
+- Auto-generates meaningful output filenames
+- Extracts video metadata and sample comments
+- Comprehensive extraction statistics and summaries
+- UTF-8 encoding support for international content
+
 #### `format_to_text.py`
 **Purpose**: Converts individual JSON comment files to human-readable text format  
 **Usage**: `python format_to_text.py --json-file input.json --output-file output.txt`  

@@ -1,1 +1,22 @@
-Requests==2.31.0
+# Core Dependencies
+requests==2.31.0
+click>=8.0.0
+loguru>=0.7.0
+
+# Web Scraping Dependencies
+selenium>=4.15.0
+undetected-chromedriver>=3.5.0
+
+# Data Processing Dependencies
+pandas>=1.5.0
+openpyxl>=3.1.0
+
+# Development Dependencies
+pytest>=7.0.0
+black>=22.0.0
+flake8>=5.0.0
+
+# Optional Dependencies for Advanced Features
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+fake-useragent>=1.4.0

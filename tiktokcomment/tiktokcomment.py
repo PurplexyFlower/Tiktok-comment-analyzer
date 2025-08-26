@@ -96,24 +96,39 @@ class TiktokComment:
         aweme_id: str
     ) -> Comments:
         page: int = 1
-        data: Comments = self.get_comments(
-            aweme_id=aweme_id,
-            page=page   
-        )
-        while(True):
-            page += 1
+        all_comments = []
+        
+        # Initial fetch to get video info
+        initial_data = self.get_comments(aweme_id=aweme_id, page=1)
+        if not initial_data or not initial_data.comments:
+            return Comments(comments=[], caption=None, video_url=None, has_more=False)
+
+        all_comments.extend(initial_data.comments)
+        caption = initial_data.caption
+        video_url = initial_data.video_url
+        
+        page = 2
+        while True:
+            logger.info(f"Fetching page {page} of comments...")
+            comments_data = self.get_comments(aweme_id=aweme_id, page=page)
+            if not comments_data or not comments_data.comments:
+                logger.info("No more comments found.")
+                break
             
-            comments: Comments = self.get_comments(
-                aweme_id=aweme_id,
-                page=page
-            )
-            if(not comments.has_more): break
+            all_comments.extend(comments_data.comments)
+            
+            if not comments_data.has_more:
+                logger.info("Last page of comments reached.")
+                break
+            
+            page += 1
 
-            data.comments.extend(
-                comments.comments
-            )
-
-        return data
+        return Comments(
+            comments=all_comments,
+            caption=caption,
+            video_url=video_url,
+            has_more=False  # All pages have been fetched
+        )
 
     def get_comments(
         self: 'TiktokComment',
@@ -133,25 +148,26 @@ class TiktokComment:
             }
         )
 
-        data: Dict[str, Any] = jmespath.search(    
-            """
-            {
-                caption: comments[0].share_info.title,
-                video_url: comments[0].share_info.url,
-                comments: comments,
-                has_more: has_more
-            }
-            """,
-            response.json()
-        )
+        data: Dict[str, Any] = response.json()
 
+        if not data or not data.get('comments'):
+            return Comments(
+                comments=[],
+                caption=None,
+                video_url=None,
+                has_more=False
+            )
+
+        comments_data = data.pop('comments')
         return Comments(
             comments=[
                 self.__parse_comment(
                     comment
-                ) for comment in data.pop('comments')
+                ) for comment in comments_data
             ],
-            **data,
+            caption=comments_data[0].get('share_info', {}).get('title'),
+            video_url=comments_data[0].get('share_info', {}).get('url'),
+            has_more=data.get('has_more')
         )
     
     def __call__(

@@ -54,7 +54,7 @@ def main(
         comments.dict,
         open(
             (final_path := '%s%s.json' % (output, aweme_id)),
-            'w'
+            'w', encoding='utf-8'
         ),
         ensure_ascii=False
     )
